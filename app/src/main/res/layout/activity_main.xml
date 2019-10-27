@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvMeaning"
         android:layout_marginTop="20dp"
-        android:hint="the meaning of...."/>
+        android:hint="The meaning of...."/>
 
     <ListView
         android:layout_width="match_parent"

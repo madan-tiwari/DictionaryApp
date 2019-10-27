@@ -3,22 +3,25 @@ package com.madantiwari.dictionaryapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
    private AutoCompleteTextView txtAuto;
    private Button btnsearch;
    private TextView tvmeaning;
    private ListView lstwords;
    private Map<String,String> wordMeanings;
+   String word;
 
     public static final String wordTomeaning[]={
             "consider","deem to be",
@@ -70,8 +73,25 @@ public class MainActivity extends AppCompatActivity {
         );
 
         lstwords.setAdapter(arrayAdapter);
+//autocomplete text
+        ArrayAdapter autoArray = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, new ArrayList(wordMeanings.keySet())
+        );
 
+        txtAuto.setAdapter(autoArray);
+        txtAuto.setThreshold(1);
+//btn code
 
+        btnsearch.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        word = txtAuto.getText().toString();
+        String meaning = wordMeanings.get(word);
+        tvmeaning.setText("The meaning of "+word+" is "+meaning);
+
+       // Toast.makeText(this, "The meaning of "+word+" is "+meaning, Toast.LENGTH_SHORT).show();
     }
 }
